@@ -9,11 +9,11 @@ package quanlysach;
  * @author HOANG HAI
  */
 public class Sach {
-    protected String maSach;
-    protected String tieuDe;
-    protected String tacGia;
-    protected int namXuatBan;
-    protected int soLuong;
+    private String maSach;
+    private String tieuDe;
+    private String tacGia;
+    private int namXuatBan;
+    private int soLuong;
 
  
     public Sach() {

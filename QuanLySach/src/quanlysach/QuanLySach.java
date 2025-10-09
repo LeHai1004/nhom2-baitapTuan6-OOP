@@ -11,21 +11,40 @@ import java.util.ArrayList;
  * @author HOANG HAI
  */
 public class QuanLySach {
-    ArrayList <Sach> danhSach = new ArrayList<>();
+    ArrayList <Sach> danhsach = new ArrayList<>();
 
-    public Sach them(Sach s){
-        
+    public void them(Sach s){
+        danhsach.add(s);
     }
-    public void xoa(){
-        
+    public Sach timkiem(String masach){
+        for(Sach s : danhsach){
+            if(s.getMaSach().equalsIgnoreCase(masach)){
+                return s;
+            }
+        }
+        return null;
+    }
+    public void xoa(String masach){
+        Sach s = timkiem(masach);
+        if(s != null){
+            danhsach.remove(s);
+        }
+        else{
+            System.out.println("khong tim thay ma sach do. ");
+        }
     }
     public void update(){
         
     }
-    public Sach timkiem(sach s){
-        
-    }
-    public list hienthidanhsach{
     
+    public void hienthidanhsach(){
+        if(danhsach.isEmpty()){
+            System.out.println("danh sach trong.");
+        }
+        else{
+            for(Sach s : danhsach){
+                  System.out.println(s.toString());
+            }
+        }
     }
 }
