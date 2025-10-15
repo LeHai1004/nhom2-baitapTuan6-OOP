@@ -34,11 +34,26 @@ public class SachTieuThuyet extends Sach {
         this.laSachSeries = laSachSeries;
     }
     
-     @Override
+     
+
+    public SachTieuThuyet(String theLoai, boolean laSachSeries, String maSach, String tieuDe, String tacGia, int namXuatBan, int soLuong, double giaCoBan) {
+        super(maSach, tieuDe, tacGia, namXuatBan, soLuong, giaCoBan);
+        this.theLoai = theLoai;
+        this.laSachSeries = laSachSeries;
+    }
+
+    @Override
+    public double tinhGiaBan() {
+        return getGiaCoBan()+(laSachSeries ? 15000:0); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
     public String toString() {
-        return super.toString() + "\n"
-             + "The loai: " + theLoai + "\n"
-             + "La sach series: " + (laSachSeries ? "Co" : "Khong");
+        return super.toString()+ "\n"
+            + "The loai: " + theLoai + "\n"
+            + "La sach series: " + (laSachSeries ? "Co" : "Khong") // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+            + "Gia sach: " + tinhGiaBan();    
+    
     }
     
 }

@@ -8,13 +8,13 @@ package quanlysach;
  *
  * @author HOANG HAI
  */
-public class Sach {
+public abstract class Sach {
     private String maSach;
     private String tieuDe;
     private String tacGia;
     private int namXuatBan;
     private int soLuong;
-
+    private double giaCoBan;
  
     public Sach() {
     }
@@ -25,6 +25,23 @@ public class Sach {
         this.tacGia = tacGia;
         this.namXuatBan = namXuatBan;
         this.soLuong = soLuong;
+    }
+
+    public Sach(String maSach, String tieuDe, String tacGia, int namXuatBan, int soLuong, double giaCoBan) {
+        this.maSach = maSach;
+        this.tieuDe = tieuDe;
+        this.tacGia = tacGia;
+        this.namXuatBan = namXuatBan;
+        this.soLuong = soLuong;
+        this.giaCoBan = giaCoBan;
+    }
+
+    public double getGiaCoBan() {
+        return giaCoBan;
+    }
+
+    public void setGiaCoBan(double giaCoBan) {
+        this.giaCoBan = giaCoBan;
     }
 
 
@@ -85,5 +102,5 @@ public class Sach {
     public String toString() {
         return "Sach{" + "maSach=" + maSach + ", tieuDe=" + tieuDe + ", tacGia=" + tacGia + ", namXuatBan=" + namXuatBan + ", soLuong=" + soLuong + '}';
     }
-    
+    public abstract double tinhGiaBan();
 }
