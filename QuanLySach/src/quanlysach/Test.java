@@ -48,8 +48,11 @@ public class Test {
                     String mh = sc.nextLine();
                     System.out.print("Nhap cap do: ");
                     String cd = sc.nextLine();
+                    System.out.print("Nhap gia co ban: ");
+                    double gia = sc.nextDouble();
+                    sc.nextLine(); 
 
-                    SachGiaoTrinh sg = new SachGiaoTrinh(ma, td, tg, nam, sl, mh, cd);
+                    SachGiaoTrinh sg = new SachGiaoTrinh(ma, td, tg, nam, sl, mh, cd, gia);
                     ql.them(sg);
                     System.out.println("Da them sach giao trinh thanh cong!");
                     break;
@@ -71,8 +74,10 @@ public class Test {
                     String tl = sc.nextLine();
                     System.out.print("La sach series (true/false): ");
                     boolean series = sc.nextBoolean();
-
-                    SachTieuThuyet st = new SachTieuThuyet(ma, td, tg, nam, sl, tl, series);
+                    System.out.print("Nhap gia co ban: ");
+                    double gia = sc.nextDouble();
+                    sc.nextLine();
+                    SachTieuThuyet st = new SachTieuThuyet(ma, td, tg, nam, sl, tl, series, gia);
                     ql.them(st);
                     System.out.println("Da them sach tieu thuyet thanh cong!");
                     break;

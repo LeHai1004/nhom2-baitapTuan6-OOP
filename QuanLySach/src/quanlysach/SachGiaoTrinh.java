@@ -34,10 +34,7 @@ public class SachGiaoTrinh extends Sach {
         this.capDo = capDo;
     }
     
-    
-}
-
-    public SachGiaoTrinh(String monHoc, String capDo, String maSach, String tieuDe, String tacGia, int namXuatBan, int soLuong, double giaCoBan) {
+     public SachGiaoTrinh(String maSach, String tieuDe, String tacGia, int namXuatBan, int soLuong, String monHoc, String capDo, Double giaCoBan) {
         super(maSach, tieuDe, tacGia, namXuatBan, soLuong, giaCoBan);
         this.monHoc = monHoc;
         this.capDo = capDo;
@@ -45,17 +42,20 @@ public class SachGiaoTrinh extends Sach {
 
     @Override
     public double tinhGiaBan() {
-        return getGiaCoBan()+(2025-getNamXuatBan())*5000); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return getGiaCoBan()+((2025-getNamXuatBan())*5000); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public String toString() {
         return super.toString()+ "\n"
             + "Mon hoc: " + monHoc + "\n"
-            + "Cap do: " + capDo; // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+            + "Cap do: " + capDo // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
             + "Gia ban: " +tinhGiaBan();
     }
+}
+
+   
 
     
     
-}
+
