@@ -5,13 +5,11 @@ import java.util.ArrayList;
 public class QuanLySach {
     private ArrayList<Sach> danhSachSach = new ArrayList<>();
 
-    // Thêm sách mới
     public void themSach(Sach sach) {
         danhSachSach.add(sach);
         System.out.println("✅ Đã thêm sách: " + sach.getTieuDe());
     }
 
-    // Xóa sách theo mã
     public boolean xoaSach(String maSach) {
         for (Sach sach : danhSachSach) {
             if (sach.getMaSach().equalsIgnoreCase(maSach)) {
@@ -24,7 +22,6 @@ public class QuanLySach {
         return false;
     }
 
-    // Cập nhật thông tin sách theo mã
     public boolean capNhatSach(String maSach, String tieuDeMoi, String tacGiaMoi, int namXuatBanMoi, int soLuongMoi) {
         for (Sach sach : danhSachSach) {
             if (sach.getMaSach().equalsIgnoreCase(maSach)) {
@@ -36,11 +33,10 @@ public class QuanLySach {
                 return true;
             }
         }
-        System.out.println(" Không tìm thấy sách có mã: " + maSach);
+        System.out.println("❌ Không tìm thấy sách có mã: " + maSach);
         return false;
     }
 
-    // Tìm sách theo mã
     public Sach timSach(String maSach) {
         for (Sach sach : danhSachSach) {
             if (sach.getMaSach().equalsIgnoreCase(maSach)) {
@@ -50,14 +46,15 @@ public class QuanLySach {
         return null;
     }
 
-    // Hiển thị danh sách sách
     public void hienThiDanhSach() {
         if (danhSachSach.isEmpty()) {
-            System.out.println("Danh sách sách đang trống!");
+            System.out.println("❗ Danh sách sách đang trống!");
         } else {
-            System.out.println(" DANH SÁCH SÁCH:");
+            System.out.println("📚 DANH SÁCH SÁCH:");
             for (Sach sach : danhSachSach) {
                 System.out.println(sach.toString());
+                System.out.println("Giá bán ước tính: " + sach.tinhGiaBan() + " VNĐ");
+                System.out.println("-------------------------------------------------");
             }
         }
     }

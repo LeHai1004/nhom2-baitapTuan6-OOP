@@ -1,67 +1,49 @@
 package QuanLySach;
-public class Sach {
-    // Thuộc tính (để private để thể hiện đóng gói)
+
+public abstract class Sach {
     protected String maSach;
     private String tieuDe;
     private String tacGia;
     private int namXuatBan;
     private int soLuong;
+    private double giaCoBan;
 
     // Constructor không tham số
     public Sach() {
     }
 
     // Constructor đầy đủ tham số
-    public Sach(String maSach, String tieuDe, String tacGia, int namXuatBan, int soLuong) {
+    public Sach(String maSach, String tieuDe, String tacGia, int namXuatBan, int soLuong, double giaCoBan) {
         this.maSach = maSach;
         this.tieuDe = tieuDe;
         this.tacGia = tacGia;
         this.namXuatBan = namXuatBan;
         this.soLuong = soLuong;
+        this.giaCoBan = giaCoBan;
     }
 
-    // Các getter và setter (thể hiện đóng gói)
-    public String getMaSach() {
-        return maSach;
-    }
+    // Getter & Setter
+    public String getMaSach() { return maSach; }
+    public void setMaSach(String maSach) { this.maSach = maSach; }
 
-    public void setMaSach(String maSach) {
-        this.maSach = maSach;
-    }
+    public String getTieuDe() { return tieuDe; }
+    public void setTieuDe(String tieuDe) { this.tieuDe = tieuDe; }
 
-    public String getTieuDe() {
-        return tieuDe;
-    }
+    public String getTacGia() { return tacGia; }
+    public void setTacGia(String tacGia) { this.tacGia = tacGia; }
 
-    public void setTieuDe(String tieuDe) {
-        this.tieuDe = tieuDe;
-    }
+    public int getNamXuatBan() { return namXuatBan; }
+    public void setNamXuatBan(int namXuatBan) { this.namXuatBan = namXuatBan; }
 
-    public String getTacGia() {
-        return tacGia;
-    }
+    public int getSoLuong() { return soLuong; }
+    public void setSoLuong(int soLuong) { this.soLuong = soLuong; }
 
-    public void setTacGia(String tacGia) {
-        this.tacGia = tacGia;
-    }
+    public double getGiaCoBan() { return giaCoBan; }
+    public void setGiaCoBan(double giaCoBan) { this.giaCoBan = giaCoBan; }
 
-    public int getNamXuatBan() {
-        return namXuatBan;
-    }
+    // Phương thức trừu tượng
+    public abstract double tinhGiaBan();
 
-    public void setNamXuatBan(int namXuatBan) {
-        this.namXuatBan = namXuatBan;
-    }
-
-    public int getSoLuong() {
-        return soLuong;
-    }
-
-    public void setSoLuong(int soLuong) {
-        this.soLuong = soLuong;
-    }
-
-    // Phương thức hiển thị thông tin sách
     public void hienThiThongTin() {
         System.out.println("----- Thông tin sách -----");
         System.out.println("Mã sách      : " + maSach);
@@ -69,13 +51,17 @@ public class Sach {
         System.out.println("Tác giả      : " + tacGia);
         System.out.println("Năm xuất bản : " + namXuatBan);
         System.out.println("Số lượng     : " + soLuong);
+        System.out.println("Giá cơ bản   : " + giaCoBan + " VNĐ");
+        System.out.println("Giá bán      : " + tinhGiaBan() + " VNĐ");
         System.out.println("---------------------------");
     }
-    public String toString()
-    { return "Mã sách: " + maSach +
-            ", Tiêu đề: " + tieuDe +
-            ", Tác giả: " + tacGia +
-            ", Năm xuất bản: " + namXuatBan +
-            ", Số lượng: " + soLuong;
-}
+
+    public String toString() {
+        return "Mã sách: " + maSach +
+                ", Tiêu đề: " + tieuDe +
+                ", Tác giả: " + tacGia +
+                ", Năm xuất bản: " + namXuatBan +
+                ", Số lượng: " + soLuong +
+                ", Giá cơ bản: " + giaCoBan;
+    }
 }
