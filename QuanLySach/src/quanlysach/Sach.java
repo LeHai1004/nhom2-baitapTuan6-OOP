@@ -95,6 +95,7 @@ public abstract class Sach {
         System.out.println("Tac gia: " + tacGia);
         System.out.println("Nam xuat ban: " + namXuatBan);
         System.out.println("So luong: " + soLuong);
+        System.out.println("Gia co ban: " + giaCoBan);
         System.out.println("---------------------------");
     }
 

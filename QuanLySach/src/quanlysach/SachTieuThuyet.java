@@ -50,7 +50,7 @@ public class SachTieuThuyet extends Sach {
     public String toString() {
         return super.toString()+ "\n"
             + "The loai: " + theLoai + "\n"
-            + "La sach series: " + (laSachSeries ? "Co" : "Khong") // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+            + "La sach series: " + (laSachSeries ? "Co" : "Khong")+"\n" // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
             + "Gia sach: " + tinhGiaBan();    
     
     }

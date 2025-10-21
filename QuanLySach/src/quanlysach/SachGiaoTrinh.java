@@ -49,7 +49,7 @@ public class SachGiaoTrinh extends Sach {
     public String toString() {
         return super.toString()+ "\n"
             + "Mon hoc: " + monHoc + "\n"
-            + "Cap do: " + capDo // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+            + "Cap do: " + capDo + "\n" // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
             + "Gia ban: " +tinhGiaBan();
     }
 }
