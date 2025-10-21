@@ -18,6 +18,12 @@ public class SachTieuThuyet extends Sach {
         this.laSachSeries = laSachSeries;
     }
 
+    public SachTieuThuyet(String maSach, String tieuDe, String tacGia, int namXuatBan, int soLuong, String theLoai, boolean laSachSeries, double giaCoBan) {
+        super(maSach, tieuDe, tacGia, namXuatBan, soLuong, giaCoBan);
+        this.theLoai = theLoai;
+        this.laSachSeries = laSachSeries;
+    }
+
     public String getTheLoai() {
         return theLoai;
     }
@@ -33,26 +39,20 @@ public class SachTieuThuyet extends Sach {
     public void setLaSachSeries(boolean laSachSeries) {
         this.laSachSeries = laSachSeries;
     }
-    
-     
-
-    public SachTieuThuyet(String maSach, String tieuDe, String tacGia, int namXuatBan, int soLuong, String theLoai, boolean laSachSeries, double giaCoBan) {
-        super(maSach, tieuDe, tacGia, namXuatBan, soLuong,giaCoBan);
-        this.theLoai = theLoai;
-        this.laSachSeries = laSachSeries;
-    }
+      
     @Override
     public double tinhGiaBan() {
-        return getGiaCoBan()+(laSachSeries ? 15000:0); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return getGiaCoBan() + (laSachSeries ? 15000 : 0);
     }
 
     @Override
     public String toString() {
         return super.toString()+ "\n"
             + "The loai: " + theLoai + "\n"
-            + "La sach series: " + (laSachSeries ? "Co" : "Khong")+"\n" // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
-            + "Gia sach: " + tinhGiaBan();    
-    
+            + "La sach series: " + (laSachSeries ? "Co" : "Khong") + "\n"
+            + "Gia sach: " + tinhGiaBan();   
     }
     
+    // Đã xóa 2 phương thức kiemTraTonKho và capNhatViTri ở đây
+    // vì chúng đã được triển khai ở lớp cha Sach.java
 }
