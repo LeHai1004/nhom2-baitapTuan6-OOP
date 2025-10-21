@@ -59,13 +59,14 @@ public class QuanLySach {
             System.out.println("2. Tác giả");
             System.out.println("3. Năm xuất bản");
             System.out.println("4. Số lượng");
+            System.out.println("5. Giá cơ bản");
 
             if (s instanceof SachGiaoTrinh) {
-                System.out.println("5. Môn học");
-                System.out.println("6. Cấp độ");
+                System.out.println("6. Môn học");
+                System.out.println("7. Cấp độ");
             } else if (s instanceof SachTieuThuyet) {
-                System.out.println("5. Thể loại");
-                System.out.println("6. Là sách series");
+                System.out.println("6. Thể loại");
+                System.out.println("7. Là sách series");
             }
             System.out.println("0. Thoát cập nhật");
             System.out.print("Chọn mục: ");
@@ -100,6 +101,11 @@ public class QuanLySach {
                     daCapNhat = true;
                     break;
                 case 5:
+                    System.out.print("Nhập giá cơ bản mới: ");
+                    s.setgiaCoBan(Double.parseDouble(sc.nextLine()));
+                    daCapNhat = true;
+                    break;
+                case 6:
                     if (s instanceof SachGiaoTrinh) {
                         System.out.print("Nhập môn học mới: ");
                         ((SachGiaoTrinh) s).setmonHoc(sc.nextLine());
@@ -110,7 +116,7 @@ public class QuanLySach {
                         daCapNhat = true;
                     }
                     break;
-                case 6:
+                case 7:
                     if (s instanceof SachGiaoTrinh) {
                         System.out.print("Nhập cấp độ mới: ");
                         ((SachGiaoTrinh) s).setcapDo(sc.nextLine());
@@ -137,7 +143,8 @@ public class QuanLySach {
             System.out.println("(Danh sách trống)");
         } else {
             for (Sach s : danhSach) {
-                System.out.println(s.toString());
+                s.hienThiThongTin();
+                System.out.println("Giá Bán Ước Tính: " + s.tinhGiaBan());
             }
         }
     }

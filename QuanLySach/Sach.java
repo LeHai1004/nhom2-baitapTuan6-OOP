@@ -8,22 +8,25 @@ package QuanLySach;
  *
  * @author Cao Phạm Nhật Quang
  */
-public class Sach {
+public abstract class Sach {
     private String maSach;
     private String tieuDe;
     private String tacGia;
     private int namXuatBan;
     private int soLuong;
+    private double giaCoBan;
     public Sach(){  
     }
     
-    public Sach(String maSach, String tieuDe, String tacGia, int namXuatBan, int soLuong){
+    public Sach(String maSach, String tieuDe, String tacGia, int namXuatBan, int soLuong, double giaCoBan){
         this.maSach = maSach;
         this.tieuDe = tieuDe;
         this.tacGia = tacGia;
         this.namXuatBan = namXuatBan;
         this.soLuong = soLuong;
+        this.giaCoBan = giaCoBan;
     }
+    public abstract double tinhGiaBan();
     public String getmaSach(){
         return maSach;
     }
@@ -54,6 +57,12 @@ public class Sach {
     public void setsoLuong( int soLuong) {
         this.soLuong = soLuong;
     }
+    public double getgiaCoBan() {
+        return giaCoBan;
+    }
+    public void setgiaCoBan( double giaCoBan) {
+        this.giaCoBan = giaCoBan;
+    }
     public void hienThiThongTin(){
         System.out.println("--------------");
         System.out.println("Ma sach: "+ maSach);
@@ -61,5 +70,16 @@ public class Sach {
         System.out.println("Tac gia: "+ tacGia);
         System.out.println("Nam xuat ban: "+ namXuatBan);
         System.out.println("So luong: "+ soLuong);
+        System.out.println("Gia co ban: " + giaCoBan);
+    }
+    @Override
+    public String toString() {
+        return "--------------" +
+                "\nMa sach: " + maSach +
+                "\nTieu de: " + tieuDe +
+                "\nTac gia: " + tacGia +
+                "\nNam xuat ban: " + namXuatBan +
+                "\nSo luong: " + soLuong +
+                "\nGia co ban: " + giaCoBan;
     }
 } 

@@ -15,8 +15,10 @@ public class Test {
         QuanLySach qlSach = new QuanLySach();
         Scanner sc = new Scanner(System.in);
         int chon;
-        qlSach.them(new SachGiaoTrinh("GT01", "Toán cao cấp A1", "Nguyễn Văn A", 2022, 50, "Toán học", "Đại học"));
-        qlSach.them(new SachTieuThuyet("TT01", "Dế Mèn phiêu lưu ký", "Tô Hoài", 1941, 100, "Thiếu nhi", true));
+        SachGiaoTrinh s1 = new SachGiaoTrinh("GT01", "Toán cao cấp A1", "Nguyễn Văn A", 2022, 50, 80000, "Toán học", "Đại học");
+        SachTieuThuyet s2 = new SachTieuThuyet("TT01", "Dế Mèn phiêu lưu ký", "Tô Hoài", 1941, 100, 50000, "Thiếu nhi", true);
+        qlSach.them(s1);
+        qlSach.them(s2);
 
         do {
             System.out.println("\n========= MENU QUẢN LÝ SÁCH =========");
@@ -43,7 +45,6 @@ public class Test {
                     qlSach.hienThiDanhSach();
                     break;
                 case 3:
-                    // Phương thức update đã có sẵn menu tương tác bên trong
                     qlSach.update();
                     break;
                 case 4:
@@ -69,6 +70,12 @@ public class Test {
                     System.out.println("-> Lựa chọn không hợp lệ. Vui lòng chọn lại!");
             }
         } while (chon != 0);
+        System.out.print("\n--- KIỂM TRA GIAO DIỆN IKiemKe (Sử dụng sách GT01) ---");
+        IKiemKe kiemKe = s1;
+        int soLuongKiemTra = 30;
+        boolean duHang = kiemKe.kiemTraTonKho(soLuongKiemTra);
+        System.out.println("Kiểm tra sách '" + s1.gettieuDe() + "' có đủ " + soLuongKiemTra + " cuốn không? -> " + duHang);
+        kiemKe.capNhatViTri("Kho A1-Kệ 5");
 
         sc.close();
     }
@@ -88,20 +95,22 @@ public class Test {
         int namXB = Integer.parseInt(sc.nextLine());
         System.out.print("Nhập số lượng: ");
         int soLuong = Integer.parseInt(sc.nextLine());
+        System.out.print("Nhập giá cơ bản: ");
+        double giaCoBan = Double.parseDouble(sc.nextLine());
 
         if (loaiSach == 1) {
             System.out.print("Nhập môn học: ");
             String monHoc = sc.nextLine();
             System.out.print("Nhập cấp độ (Phổ thông, Đại học,...): ");
             String capDo = sc.nextLine();
-            SachGiaoTrinh sgt = new SachGiaoTrinh(maSach, tieuDe, tacGia, namXB, soLuong, monHoc, capDo);
+            SachGiaoTrinh sgt = new SachGiaoTrinh(maSach, tieuDe, tacGia, namXB, soLuong, giaCoBan, monHoc, capDo);
             ql.them(sgt);
         } else if (loaiSach == 2) {
             System.out.print("Nhập thể loại (Lãng mạn, Viễn tưởng,...): ");
             String theLoai = sc.nextLine();
             System.out.print("Có phải sách series không (true/false): ");
             boolean isSeries = Boolean.parseBoolean(sc.nextLine());
-            SachTieuThuyet stt = new SachTieuThuyet(maSach, tieuDe, tacGia, namXB, soLuong, theLoai, isSeries);
+            SachTieuThuyet stt = new SachTieuThuyet(maSach, tieuDe, tacGia, namXB, soLuong, giaCoBan, theLoai, isSeries);
             ql.them(stt);
         } else {
             System.out.println("-> Lựa chọn loại sách không hợp lệ!");
