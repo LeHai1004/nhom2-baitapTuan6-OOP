@@ -10,5 +10,4 @@ package quanlysach;
  */
 public interface IGiaBan {
     public abstract double tinhGiaBan();
-    
 }

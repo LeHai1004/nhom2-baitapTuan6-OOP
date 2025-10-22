@@ -12,5 +12,6 @@ public interface IQuanLySach {
     public abstract void them(Sach s);
     public abstract Sach timkiem(String masach);
     public abstract void xoa(String masach);
+    public abstract void update();
     public abstract void hienthidanhsach();
 }

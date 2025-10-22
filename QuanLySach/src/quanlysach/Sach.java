@@ -36,7 +36,16 @@ public abstract class Sach implements IGiaBan, IKiemKe {
         this.namXuatBan = namXuatBan;
         this.soLuong = soLuong;
         this.giaCoBan = giaCoBan;
-        this.viTri = viTri; // Gán một vị trí mặc định
+    }
+
+    public Sach(String maSach, String tieuDe, String tacGia, int namXuatBan, int soLuong, double giaCoBan, String viTri) {
+        this.maSach = maSach;
+        this.tieuDe = tieuDe;
+        this.tacGia = tacGia;
+        this.namXuatBan = namXuatBan;
+        this.soLuong = soLuong;
+        this.giaCoBan = giaCoBan;
+        this.viTri = viTri;
     }
 
     // --- Các getters và setters ---
