@@ -14,10 +14,14 @@ public class Test {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        QuanLySach ql = new QuanLySach();
+        QuanLySachImpl ql = new QuanLySachImpl();
         Scanner sc = new Scanner(System.in);
         int chon;
 
+        // Thêm dữ liệu mẫu
+        ql.them(new SachGiaoTrinh("SGT01", "Toan Cao Cap", "Nguyen A", 2020, 50, "Toan", "Dai hoc", 120000.0));
+        ql.them(new SachTieuThuyet("STT01", "Harry Potter", "J.K. Rowling", 2005, 100, "Phieu luu", true, 150000.0));
+        
         do {
             System.out.println("\n===== MENU QUAN LY SACH =====");
             System.out.println("1. Them sach giao trinh");
@@ -26,6 +30,9 @@ public class Test {
             System.out.println("4. Tim kiem sach theo ma");
             System.out.println("5. Cap nhat thong tin sach");
             System.out.println("6. Xoa sach theo ma");
+            // ===== THÊM MỚI 2 LỰA CHỌN MENU =====
+            System.out.println("7. Kiem tra ton kho");
+            System.out.println("8. Cap nhat vi tri sach");
             System.out.println("0. Thoat chuong trinh");
             System.out.print("Nhap lua chon: ");
             chon = sc.nextInt();
@@ -35,6 +42,8 @@ public class Test {
                 case 1 : {
                     System.out.print("Nhap ma sach: ");
                     String ma = sc.nextLine();
+                    // (Bạn có thể thêm kiểm tra trùng mã ở đây)
+                    // if (ql.timkiem(ma) != null) { System.out.println("Ma da ton tai!"); break; }
                     System.out.print("Nhap tieu de: ");
                     String td = sc.nextLine();
                     System.out.print("Nhap tac gia: ");
@@ -51,8 +60,14 @@ public class Test {
                     System.out.print("Nhap gia co ban: ");
                     double gia = sc.nextDouble();
                     sc.nextLine(); 
+                    
+                    // THÊM MỚI: Nhập vị trí
+                    System.out.print("Nhap vi tri dat sach: ");
+                    String viTri = sc.nextLine();
 
                     SachGiaoTrinh sg = new SachGiaoTrinh(ma, td, tg, nam, sl, mh, cd, gia);
+                    sg.setViTri(viTri); // THÊM MỚI: Gán vị trí
+                    
                     ql.them(sg);
                     System.out.println("Da them sach giao trinh thanh cong!");
                     break;
@@ -61,6 +76,7 @@ public class Test {
                 case 2 : {
                     System.out.print("Nhap ma sach: ");
                     String ma = sc.nextLine();
+                    // (Bạn có thể thêm kiểm tra trùng mã ở đây)
                     System.out.print("Nhap tieu de: ");
                     String td = sc.nextLine();
                     System.out.print("Nhap tac gia: ");
@@ -77,7 +93,14 @@ public class Test {
                     System.out.print("Nhap gia co ban: ");
                     double gia = sc.nextDouble();
                     sc.nextLine();
+                    
+                    // THÊM MỚI: Nhập vị trí
+                    System.out.print("Nhap vi tri dat sach: ");
+                    String viTri = sc.nextLine();
+                    
                     SachTieuThuyet st = new SachTieuThuyet(ma, td, tg, nam, sl, tl, series, gia);
+                    st.setViTri(viTri); // THÊM MỚI: Gán vị trí
+                    
                     ql.them(st);
                     System.out.println("Da them sach tieu thuyet thanh cong!");
                     break;
@@ -97,30 +120,71 @@ public class Test {
                         System.out.println("Tim thay sach:");
                         System.out.println(s.toString());
                     } else {
-                        System.out.println("️Khong tim thay sach co ma: " + ma);
+                        System.out.println("Khong tim thay sach co ma: " + ma);
                     }
                     break;
                 }
 
                 case 5 : {
-                    ql.update(); // gọi hàm cập nhật bạn đã viết trong QuanLySach
+                    ql.update(); // Gọi hàm cập nhật (đã có lựa chọn cập nhật vị trí bên trong)
                     break;
                 }
 
                 case 6 : {
                     System.out.print("Nhap ma sach can xoa: ");
                     String ma = sc.nextLine();
-                    ql.xoa(ma);
-                    System.out.println("Da xoa sach (neu ton tai).");
+                    ql.xoa(ma); // Hàm xoa() đã có thông báo riêng
                     break;
                 }
-
+                // ===== THÊM MỚI 2 CASE XỬ LÝ =====
+                case 7: {
+                    System.out.print("Nhap ma sach can kiem tra: ");
+                    String maKiemTra = sc.nextLine();
+                    Sach sKiemTra = ql.timkiem(maKiemTra);
+                    
+                    if (sKiemTra != null) {
+                        System.out.print("Nhap so luong ton kho toi thieu can kiem tra: ");
+                        int slToiThieu = sc.nextInt();
+                        sc.nextLine(); // dọn dẹp
+                        
+                        // Gọi phương thức từ đối tượng Sach
+                        boolean ketQua = sKiemTra.kiemTraTonKho(slToiThieu);
+                        
+                        if (ketQua) {
+                            System.out.println("=> KET QUA: OK! So luong ton kho (" + sKiemTra.getSoLuong() + ") >= " + slToiThieu);
+                        } else {
+                            System.out.println("=> KET QUA: Can nhap them! So luong ton kho (" + sKiemTra.getSoLuong() + ") < " + slToiThieu);
+                        }
+                    } else {
+                        System.out.println("Khong tim thay sach!");
+                    }
+                    break;
+                }
+                
+                case 8: {
+                    System.out.print("Nhap ma sach can cap nhat vi tri: ");
+                    String maViTri = sc.nextLine();
+                    Sach sViTri = ql.timkiem(maViTri);
+                    
+                    if (sViTri != null) {
+                        System.out.println("Vi tri hien tai: " + sViTri.getViTri());
+                        System.out.print("Nhap vi tri moi: ");
+                        String viTriMoi = sc.nextLine();
+                        
+                        // Gọi phương thức từ đối tượng Sach
+                        sViTri.capNhatViTri(viTriMoi);
+                        System.out.println("Da cap nhat vi tri thanh cong!");
+                    } else {
+                        System.out.println("Khong tim thay sach!");
+                    }
+                    break;
+                }
                 case 0 : {
                     System.out.println(" Thoat chuong trinh. Tam biet!");
                     break;
                 }
 
-                default : System.out.println("️ Lua chon khong hop le!");
+                default : System.out.println(" Lua chon khong hop le!");
             }
 
         } while (chon != 0);

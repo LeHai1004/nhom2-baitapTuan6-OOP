@@ -10,12 +10,14 @@ import java.util.Scanner;
  *
  * @author HOANG HAI
  */
-public class QuanLySach {
+public class QuanLySachImpl implements IQuanLySach {
     ArrayList <Sach> danhsach = new ArrayList<>();
 
+    @Override
     public void them(Sach s){
         danhsach.add(s);
     }
+    @Override
     public Sach timkiem(String masach){
         for(Sach s : danhsach){
             if(s.getMaSach().equalsIgnoreCase(masach)){
@@ -24,6 +26,7 @@ public class QuanLySach {
         }
         return null;
     }
+    @Override
     public void xoa(String masach){
         Sach s = timkiem(masach);
         if(s != null){
@@ -33,6 +36,7 @@ public class QuanLySach {
             System.out.println("khong tim thay ma sach do. ");
         }
     }
+    @Override
     public void update() {
     Scanner sc = new Scanner(System.in);
     System.out.print("Nhap ma sach can cap nhat: ");
@@ -126,6 +130,7 @@ public class QuanLySach {
 }
   
 
+    @Override
     public void hienthidanhsach(){
         if(danhsach.isEmpty()){
             System.out.println("danh sach trong.");
