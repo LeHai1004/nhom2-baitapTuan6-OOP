@@ -8,17 +8,18 @@ package QuanLySach;
  *
  * @author Cao Phạm Nhật Quang
  */
-public abstract class Sach {
+public abstract class Sach implements IGiaBan, IKiemKe {
     private String maSach;
     private String tieuDe;
     private String tacGia;
     private int namXuatBan;
     private int soLuong;
     private double giaCoBan;
-    public Sach(){  
+
+    public Sach() {
     }
-    
-    public Sach(String maSach, String tieuDe, String tacGia, int namXuatBan, int soLuong, double giaCoBan){
+
+    public Sach(String maSach, String tieuDe, String tacGia, int namXuatBan, int soLuong, double giaCoBan) {
         this.maSach = maSach;
         this.tieuDe = tieuDe;
         this.tacGia = tacGia;
@@ -26,52 +27,31 @@ public abstract class Sach {
         this.soLuong = soLuong;
         this.giaCoBan = giaCoBan;
     }
-    public abstract double tinhGiaBan();
-    public String getmaSach(){
-        return maSach;
+
+    @Override
+    public abstract double tinhGiaBan(); 
+
+    @Override
+    public boolean kiemTraTonKho(int soLuongToiThieu) {
+        return this.soLuong >= soLuongToiThieu;
     }
-    public void setmaSach(String maSach) {
-        this.maSach = maSach;
+
+    @Override
+    public void capNhatViTri(String viTriMoi) {
+        System.out.println("Đã chuyển sách " + this.tieuDe + " đến khu vực: " + viTriMoi); // [cite: 19]
     }
-    public String gettieuDe() {
-        return tieuDe;
-    }
-    public void settieuDe(String tieuDe) {
-        this.tieuDe = tieuDe;
-    }
-    public String gettacGia() {
-        return tacGia;
-    }
-    public void settacGia(String tacGia) {
-        this.tacGia = tacGia;
-    }
-    public int getnamXuatBan() {
-        return namXuatBan;
-    }
-    public void setnamXuatBan(int namXuatBan) {
-        this.namXuatBan = namXuatBan;
-    }
-    public int getsoLuong() {
-        return soLuong;
-    }
-    public void setsoLuong( int soLuong) {
-        this.soLuong = soLuong;
-    }
-    public double getgiaCoBan() {
-        return giaCoBan;
-    }
-    public void setgiaCoBan( double giaCoBan) {
-        this.giaCoBan = giaCoBan;
-    }
-    public void hienThiThongTin(){
-        System.out.println("--------------");
-        System.out.println("Ma sach: "+ maSach);
-        System.out.println("Tieu de: "+ tieuDe);
-        System.out.println("Tac gia: "+ tacGia);
-        System.out.println("Nam xuat ban: "+ namXuatBan);
-        System.out.println("So luong: "+ soLuong);
-        System.out.println("Gia co ban: " + giaCoBan);
-    }
+    public String getmaSach() { return maSach; }
+    public void setmaSach(String maSach) { this.maSach = maSach; }
+    public String gettieuDe() { return tieuDe; }
+    public void settieuDe(String tieuDe) { this.tieuDe = tieuDe; }
+    public String gettacGia() { return tacGia; }
+    public void settacGia(String tacGia) { this.tacGia = tacGia; }
+    public int getnamXuatBan() { return namXuatBan; }
+    public void setnamXuatBan(int namXuatBan) { this.namXuatBan = namXuatBan; }
+    public int getsoLuong() { return soLuong; }
+    public void setsoLuong(int soLuong) { this.soLuong = soLuong; }
+    public double getGiaCoBan() { return giaCoBan; }
+    public void setGiaCoBan(double giaCoBan) { this.giaCoBan = giaCoBan; }
     @Override
     public String toString() {
         return "--------------" +
@@ -82,4 +62,8 @@ public abstract class Sach {
                 "\nSo luong: " + soLuong +
                 "\nGia co ban: " + giaCoBan;
     }
-} 
+
+    public void hienThiThongTin() {
+        System.out.println(this.toString());
+    }
+}

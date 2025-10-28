@@ -3,24 +3,26 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package QuanLySach;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
  * @author Cao Phạm Nhật Quang
  */
-import java.util.ArrayList;
-import java.util.Scanner;
-
-public class QuanLySach {
+public class QuanLySachImpl implements IQuanLySach {
     private ArrayList<Sach> danhSach = new ArrayList<>();
+    private Scanner sc = new Scanner(System.in); // Đưa Scanner ra làm thuộc tính
 
+    @Override
     public void them(Sach s) {
         danhSach.add(s);
+        System.out.println("-> Đã thêm sách thành công!");
     }
 
+    @Override
     public Sach timKiem(String maSach) {
         for (Sach s : danhSach) {
-            // Sửa lại đúng tên phương thức gốc của bạn
             if (s.getmaSach().equalsIgnoreCase(maSach)) {
                 return s;
             }
@@ -28,6 +30,7 @@ public class QuanLySach {
         return null;
     }
 
+    @Override
     public void xoa(String maSach) {
         Sach s = timKiem(maSach);
         if (s != null) {
@@ -38,8 +41,20 @@ public class QuanLySach {
         }
     }
 
+    @Override
+    public void hienThiDanhSach() {
+        System.out.println("\n--- DANH SÁCH TẤT CẢ SÁCH ---");
+        if (danhSach.isEmpty()) {
+            System.out.println("(Danh sách trống)");
+        } else {
+            for (Sach s : danhSach) {
+                System.out.println(s.toString());
+            }
+        }
+    }
+
+    @Override
     public void update() {
-        Scanner sc = new Scanner(System.in);
         System.out.print("Nhập mã sách cần cập nhật: ");
         String ma = sc.nextLine();
 
@@ -60,7 +75,7 @@ public class QuanLySach {
             System.out.println("3. Năm xuất bản");
             System.out.println("4. Số lượng");
             System.out.println("5. Giá cơ bản");
-
+            
             if (s instanceof SachGiaoTrinh) {
                 System.out.println("6. Môn học");
                 System.out.println("7. Cấp độ");
@@ -81,7 +96,6 @@ public class QuanLySach {
             switch (chon) {
                 case 1:
                     System.out.print("Nhập tiêu đề mới: ");
-                    // Sửa lại đúng tên phương thức gốc của bạn
                     s.settieuDe(sc.nextLine());
                     daCapNhat = true;
                     break;
@@ -102,7 +116,7 @@ public class QuanLySach {
                     break;
                 case 5:
                     System.out.print("Nhập giá cơ bản mới: ");
-                    s.setgiaCoBan(Double.parseDouble(sc.nextLine()));
+                    s.setGiaCoBan(Double.parseDouble(sc.nextLine()));
                     daCapNhat = true;
                     break;
                 case 6:
@@ -132,20 +146,8 @@ public class QuanLySach {
                 default:
                     System.out.println("-> Lựa chọn không hợp lệ!");
             }
-            if(daCapNhat) System.out.println("-> Cập nhật thành công!");
+            if (daCapNhat) System.out.println("-> Cập nhật thành công!");
 
         } while (chon != 0);
-    }
-    
-    public void hienThiDanhSach() {
-        System.out.println("\n--- DANH SÁCH TẤT CẢ SÁCH ---");
-        if (danhSach.isEmpty()) {
-            System.out.println("(Danh sách trống)");
-        } else {
-            for (Sach s : danhSach) {
-                s.hienThiThongTin();
-                System.out.println("Giá Bán Ước Tính: " + s.tinhGiaBan());
-            }
-        }
     }
 }
