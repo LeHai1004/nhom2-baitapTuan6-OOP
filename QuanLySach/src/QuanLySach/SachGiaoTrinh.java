@@ -1,12 +1,12 @@
-package QuanLySach;
-
 public class SachGiaoTrinh extends Sach {
     private String monHoc;
-    private String capDo;
+    private String capDo; // ví dụ: "Dai cuong", "Tien si", "Co ban"...
 
-    public SachGiaoTrinh(String maSach, String tieuDe, String tacGia, int namXuatBan, int soLuong,
-                         double giaCoBan, String monHoc, String capDo) {
-        super(maSach, tieuDe, tacGia, namXuatBan, soLuong, giaCoBan);
+    public SachGiaoTrinh() {}
+
+    public SachGiaoTrinh(String maSach, String tieuDe, String tacGia, int soLuong, String viTri, double giaCoBan,
+                         String monHoc, String capDo) {
+        super(maSach, tieuDe, tacGia, soLuong, viTri, giaCoBan);
         this.monHoc = monHoc;
         this.capDo = capDo;
     }
@@ -17,24 +17,33 @@ public class SachGiaoTrinh extends Sach {
     public String getCapDo() { return capDo; }
     public void setCapDo(String capDo) { this.capDo = capDo; }
 
+    // Ví dụ logic: sách giáo trình áp thuế 5%, nếu số lượng > 100 được giảm 3% trên giá bán (sau thuế)
     @Override
     public double tinhGiaBan() {
-        int namHienTai = 2025;
-        int soNam = namHienTai - getNamXuatBan();
-        if (soNam < 0) soNam = 0;
-        return getGiaCoBan() + soNam * 5000.0;
+        double base = getGiaCoBan();
+        double sauThue = base * 1.05; // +5% VAT
+        if (getSoLuong() > 100) {
+            sauThue = sauThue * 0.97; // giảm 3%
+        }
+        return Math.round(sauThue * 100.0) / 100.0;
+    }
+
+    @Override
+    public boolean kiemTraTonKho(int soLuongToiThieu) {
+        return getSoLuong() >= soLuongToiThieu;
+    }
+
+    @Override
+    public void capNhatViTri(String viTriMoi) {
+        setViTri(viTriMoi);
+        System.out.println("Đã chuyển sách \"" + getTieuDe() + "\" đến khu vực: " + viTriMoi);
     }
 
     @Override
     public String toString() {
-        return "Sach giao trinh:" +
-               "\nMa sach: " + getMaSach() +
-               "\nTieu de: " + getTieuDe() +
-               "\nTac gia: " + getTacGia() +
-               "\nNam xuat ban: " + getNamXuatBan() +
-               "\nSo luong: " + getSoLuong() +
-               String.format("\nGia co ban: %.0f VND\nGia ban tinh duoc: %.0f VND", getGiaCoBan(), tinhGiaBan()) +
-               "\nMon hoc: " + monHoc +
-               "\nCap do: " + capDo;
+        return "SACH GIAO TRINH -> " + super.toString() +
+               " | MonHoc: " + monHoc +
+               " | CapDo: " + capDo +
+               " | GiaBan: " + String.format("%.2f", tinhGiaBan());
     }
 }

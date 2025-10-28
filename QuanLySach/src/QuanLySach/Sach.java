@@ -1,25 +1,23 @@
-package QuanLySach;
-
-public abstract class Sach {
+public abstract class Sach implements IGiaBan, IKiemKe {
     private String maSach;
     private String tieuDe;
     private String tacGia;
-    private int namXuatBan;
     private int soLuong;
-    private double giaCoBan; // thuộc tính mới
+    private String viTri;
+    private double giaCoBan;
 
     public Sach() {}
 
-    public Sach(String maSach, String tieuDe, String tacGia, int namXuatBan, int soLuong, double giaCoBan) {
+    public Sach(String maSach, String tieuDe, String tacGia, int soLuong, String viTri, double giaCoBan) {
         this.maSach = maSach;
         this.tieuDe = tieuDe;
         this.tacGia = tacGia;
-        this.namXuatBan = namXuatBan;
         this.soLuong = soLuong;
+        this.viTri = viTri;
         this.giaCoBan = giaCoBan;
     }
 
-    // getter / setter
+    // Getters & Setters
     public String getMaSach() { return maSach; }
     public void setMaSach(String maSach) { this.maSach = maSach; }
 
@@ -29,31 +27,32 @@ public abstract class Sach {
     public String getTacGia() { return tacGia; }
     public void setTacGia(String tacGia) { this.tacGia = tacGia; }
 
-    public int getNamXuatBan() { return namXuatBan; }
-    public void setNamXuatBan(int namXuatBan) { this.namXuatBan = namXuatBan; }
-
     public int getSoLuong() { return soLuong; }
     public void setSoLuong(int soLuong) { this.soLuong = soLuong; }
+
+    public String getViTri() { return viTri; }
+    public void setViTri(String viTri) { this.viTri = viTri; }
 
     public double getGiaCoBan() { return giaCoBan; }
     public void setGiaCoBan(double giaCoBan) { this.giaCoBan = giaCoBan; }
 
-    // phương thức abstract yêu cầu các lớp con triển khai
+    // Các phương thức trừu tượng từ interface sẽ được lớp con triển khai
+    @Override
     public abstract double tinhGiaBan();
 
     @Override
-    public String toString() {
-        return "Ma sach: " + maSach +
-               "\nTieu de: " + tieuDe +
-               "\nTac gia: " + tacGia +
-               "\nNam xuat ban: " + namXuatBan +
-               "\nSo luong: " + soLuong +
-               String.format("\nGia co ban: %.0f VND\nGia ban tinh duoc: %.0f VND", giaCoBan, tinhGiaBan());
-    }
+    public abstract boolean kiemTraTonKho(int soLuongToiThieu);
 
-    // phương thức hiển thị (giữ tương tự)
-    public void hienThiThongTin() {
-        System.out.println(this.toString());
-        System.out.println("----------------------------");
+    @Override
+    public abstract void capNhatViTri(String viTriMoi);
+
+    @Override
+    public String toString() {
+        return "Ma: " + maSach +
+               " | TieuDe: " + tieuDe +
+               " | TacGia: " + tacGia +
+               " | SoLuong: " + soLuong +
+               " | ViTri: " + viTri +
+               " | GiaCoBan: " + String.format("%.2f", giaCoBan);
     }
 }
