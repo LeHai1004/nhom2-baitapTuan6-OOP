@@ -1,6 +1,6 @@
 package QuanLySach;
 
-public abstract class Sach {
+public abstract class Sach implements IGiaBan, IKiemKe {
     protected String maSach;
     private String tieuDe;
     private String tacGia;
@@ -8,11 +8,9 @@ public abstract class Sach {
     private int soLuong;
     private double giaCoBan;
 
-    // Constructor không tham số
     public Sach() {
     }
 
-    // Constructor đầy đủ tham số
     public Sach(String maSach, String tieuDe, String tacGia, int namXuatBan, int soLuong, double giaCoBan) {
         this.maSach = maSach;
         this.tieuDe = tieuDe;
@@ -22,7 +20,6 @@ public abstract class Sach {
         this.giaCoBan = giaCoBan;
     }
 
-    // Getter & Setter
     public String getMaSach() { return maSach; }
     public void setMaSach(String maSach) { this.maSach = maSach; }
 
@@ -41,21 +38,20 @@ public abstract class Sach {
     public double getGiaCoBan() { return giaCoBan; }
     public void setGiaCoBan(double giaCoBan) { this.giaCoBan = giaCoBan; }
 
-    // Phương thức trừu tượng
+    @Override
     public abstract double tinhGiaBan();
 
-    public void hienThiThongTin() {
-        System.out.println("----- Thông tin sách -----");
-        System.out.println("Mã sách      : " + maSach);
-        System.out.println("Tiêu đề      : " + tieuDe);
-        System.out.println("Tác giả      : " + tacGia);
-        System.out.println("Năm xuất bản : " + namXuatBan);
-        System.out.println("Số lượng     : " + soLuong);
-        System.out.println("Giá cơ bản   : " + giaCoBan + " VNĐ");
-        System.out.println("Giá bán      : " + tinhGiaBan() + " VNĐ");
-        System.out.println("---------------------------");
+    @Override
+    public boolean kiemTraTonKho(int soLuongToiThieu) {
+        return this.soLuong >= soLuongToiThieu;
     }
 
+    @Override
+    public void capNhatViTri(String viTriMoi) {
+        System.out.println("✅ Đã chuyển sách '" + this.tieuDe + "' đến khu vực: " + viTriMoi);
+    }
+
+    @Override
     public String toString() {
         return "Mã sách: " + maSach +
                 ", Tiêu đề: " + tieuDe +
@@ -64,4 +60,11 @@ public abstract class Sach {
                 ", Số lượng: " + soLuong +
                 ", Giá cơ bản: " + giaCoBan;
     }
+    
+    public void hienThiThongTin() {
+        System.out.println("----- Thông tin sách -----");
+        System.out.println(this.toString()); 
+        System.out.println("---------------------------");
+    }
 }
+

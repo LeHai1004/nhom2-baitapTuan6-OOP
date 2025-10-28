@@ -2,58 +2,61 @@ package QuanLySach;
 
 import java.util.ArrayList;
 
-public class QuanLySach {
+public class QuanLySachImpl implements IQuanLySach {
+    
     private ArrayList<Sach> danhSachSach = new ArrayList<>();
 
+    @Override
     public void themSach(Sach sach) {
         danhSachSach.add(sach);
         System.out.println("✅ Đã thêm sách: " + sach.getTieuDe());
     }
 
+    @Override
     public boolean xoaSach(String maSach) {
-        for (Sach sach : danhSachSach) {
-            if (sach.getMaSach().equalsIgnoreCase(maSach)) {
-                danhSachSach.remove(sach);
-                System.out.println("✅ Đã xóa sách có mã: " + maSach);
-                return true;
-            }
+        Sach sachCanXoa = timSach(maSach); 
+        if (sachCanXoa != null) {
+            danhSachSach.remove(sachCanXoa);
+            System.out.println("✅ Đã xóa sách có mã: " + maSach);
+            return true;
         }
         System.out.println("❌ Không tìm thấy sách có mã: " + maSach);
         return false;
     }
 
+    @Override
     public boolean capNhatSach(String maSach, String tieuDeMoi, String tacGiaMoi, int namXuatBanMoi, int soLuongMoi) {
-        for (Sach sach : danhSachSach) {
-            if (sach.getMaSach().equalsIgnoreCase(maSach)) {
-                sach.setTieuDe(tieuDeMoi);
-                sach.setTacGia(tacGiaMoi);
-                sach.setNamXuatBan(namXuatBanMoi);
-                sach.setSoLuong(soLuongMoi);
-                System.out.println("✅ Đã cập nhật sách có mã: " + maSach);
-                return true;
-            }
+        Sach sachCanCapNhat = timSach(maSach); 
+        if (sachCanCapNhat != null) {
+            sachCanCapNhat.setTieuDe(tieuDeMoi);
+            sachCanCapNhat.setTacGia(tacGiaMoi);
+            sachCanCapNhat.setNamXuatBan(namXuatBanMoi);
+            sachCanCapNhat.setSoLuong(soLuongMoi);
+            System.out.println("✅ Đã cập nhật sách có mã: " + maSach);
+            return true;
         }
         System.out.println("❌ Không tìm thấy sách có mã: " + maSach);
         return false;
     }
 
+    @Override
     public Sach timSach(String maSach) {
         for (Sach sach : danhSachSach) {
             if (sach.getMaSach().equalsIgnoreCase(maSach)) {
                 return sach;
             }
         }
-        return null;
+        return null; 
     }
 
+    @Override
     public void hienThiDanhSach() {
         if (danhSachSach.isEmpty()) {
             System.out.println("❗ Danh sách sách đang trống!");
         } else {
-            System.out.println("📚 DANH SÁCH SÁCH:");
+            System.out.println("\n📚 --- DANH SÁCH SÁCH TRONG KHO --- 📚");
             for (Sach sach : danhSachSach) {
                 System.out.println(sach.toString());
-                System.out.println("Giá bán ước tính: " + sach.tinhGiaBan() + " VNĐ");
                 System.out.println("-------------------------------------------------");
             }
         }

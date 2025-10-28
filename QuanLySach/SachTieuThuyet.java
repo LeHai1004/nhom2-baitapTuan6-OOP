@@ -1,6 +1,6 @@
 package QuanLySach;
 
-public class SachTieuThuyet extends Sach implements IKiemKe {
+public class SachTieuThuyet extends Sach {
     private String theLoai;
     private boolean laSachSeries;
 
@@ -23,19 +23,9 @@ public class SachTieuThuyet extends Sach implements IKiemKe {
 
     @Override
     public String toString() {
-        return super.toString() +
+        return "[TIỂU THUYẾT] " + super.toString() +
                 ", Thể loại: " + theLoai +
                 ", Có thuộc series: " + laSachSeries +
                 ", Giá bán: " + tinhGiaBan() + " VNĐ";
-    }
-
-    @Override
-    public boolean kiemTraTonKho(int soLuongToiThieu) {
-        return getSoLuong() >= soLuongToiThieu;
-    }
-
-    @Override
-    public void capNhatViTri(String viTriMoi) {
-        System.out.println("✅ Đã chuyển sách '" + getTieuDe() + "' đến khu vực: " + viTriMoi);
     }
 }
