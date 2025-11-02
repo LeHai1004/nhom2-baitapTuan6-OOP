@@ -1,7 +1,7 @@
 package QuanLySach;
 
 public abstract class Sach implements IGiaBan, IKiemKe {
-    protected String maSach;
+    private String maSach;
     private String tieuDe;
     private String tacGia;
     private int namXuatBan;

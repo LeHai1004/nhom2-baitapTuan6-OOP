@@ -1,22 +1,24 @@
 package QuanLySach;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class QuanLySachImpl implements IQuanLySach {
-    
-    private ArrayList<Sach> danhSachSach = new ArrayList<>();
+    private Map<String, Sach> danhSachSach = new HashMap<>();
 
     @Override
     public void themSach(Sach sach) {
-        danhSachSach.add(sach);
+        if (danhSachSach.containsKey(sach.getMaSach())) {
+            System.out.println("⚠️ Sách có mã " + sach.getMaSach() + " đã tồn tại!");
+            return;
+        }
+        danhSachSach.put(sach.getMaSach(), sach);
         System.out.println("✅ Đã thêm sách: " + sach.getTieuDe());
     }
 
     @Override
     public boolean xoaSach(String maSach) {
-        Sach sachCanXoa = timSach(maSach); 
-        if (sachCanXoa != null) {
-            danhSachSach.remove(sachCanXoa);
+        if (danhSachSach.remove(maSach) != null) {
             System.out.println("✅ Đã xóa sách có mã: " + maSach);
             return true;
         }
@@ -26,12 +28,12 @@ public class QuanLySachImpl implements IQuanLySach {
 
     @Override
     public boolean capNhatSach(String maSach, String tieuDeMoi, String tacGiaMoi, int namXuatBanMoi, int soLuongMoi) {
-        Sach sachCanCapNhat = timSach(maSach); 
-        if (sachCanCapNhat != null) {
-            sachCanCapNhat.setTieuDe(tieuDeMoi);
-            sachCanCapNhat.setTacGia(tacGiaMoi);
-            sachCanCapNhat.setNamXuatBan(namXuatBanMoi);
-            sachCanCapNhat.setSoLuong(soLuongMoi);
+        Sach sach = danhSachSach.get(maSach);
+        if (sach != null) {
+            sach.setTieuDe(tieuDeMoi);
+            sach.setTacGia(tacGiaMoi);
+            sach.setNamXuatBan(namXuatBanMoi);
+            sach.setSoLuong(soLuongMoi);
             System.out.println("✅ Đã cập nhật sách có mã: " + maSach);
             return true;
         }
@@ -41,12 +43,7 @@ public class QuanLySachImpl implements IQuanLySach {
 
     @Override
     public Sach timSach(String maSach) {
-        for (Sach sach : danhSachSach) {
-            if (sach.getMaSach().equalsIgnoreCase(maSach)) {
-                return sach;
-            }
-        }
-        return null; 
+        return danhSachSach.get(maSach);
     }
 
     @Override
@@ -55,7 +52,7 @@ public class QuanLySachImpl implements IQuanLySach {
             System.out.println("❗ Danh sách sách đang trống!");
         } else {
             System.out.println("\n📚 --- DANH SÁCH SÁCH TRONG KHO --- 📚");
-            for (Sach sach : danhSachSach) {
+            for (Sach sach : danhSachSach.values()) {
                 System.out.println(sach.toString());
                 System.out.println("-------------------------------------------------");
             }
